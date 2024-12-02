@@ -8,38 +8,12 @@ const pusher = new Pusher({
   useTLS: true
 });
 
-pusher.trigger("my-channel", "my-event", {
-  message: "hello world"
+pusher.trigger("MYCHANNEL", "MYEVENT", {
+  message: "This Is A Notification"
 });
 
 
-var events = new List<Event>();
-// count can be anything between 1 and 10000
-for (int i = 1; i <= count; i++)
-{
-    // creating a sample list of events
-    events.Add(new Event
-    {
-        Channel = string.Format("batch-channel-{0}", i),
-        EventName = "batch-event",
-        Data = new
-        {
-            Channel = string.Format("batch-channel-{0}", i),
-            Event = "batch-event",
-            Message = string.Format("{0} - sample message", i)
-        {
-    });
-}
-var result = new List<HttpStatusCode>();
-int chunkSize = 10;
-int totalChunks = (int)Math.Ceiling((double)events.Length / chunkSize);
-for (int i = 0; i < totalChunks; i++)
-{
-    var eventsChunk = events.Skip(i * chunkSize).Take(chunkSize).ToArray();
-    // publishing event lists of size 10
-    var chunkResult = await pusher.TriggerAsync(eventsChunk);
-    result.Add(chunkResult.StatusCode);
-}
+
 using PusherServer;
 
 var options = new PusherOptions();
@@ -49,4 +23,4 @@ var pusher = new Pusher("APP_ID", "APP_KEY", "APP_SECRET", options);
 ITriggerResult result = await pusher.TriggerAsync(
   new string[]{"my-channel-1", "my-channel-2", "my-channel-3"},
   "my-event",
-  new { message: "hello world" });
+  new { message: "This Is A Notification" });
