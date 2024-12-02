@@ -40,3 +40,13 @@ for (int i = 0; i < totalChunks; i++)
     var chunkResult = await pusher.TriggerAsync(eventsChunk);
     result.Add(chunkResult.StatusCode);
 }
+using PusherServer;
+
+var options = new PusherOptions();
+options.Cluster = "APP_CLUSTER";
+var pusher = new Pusher("APP_ID", "APP_KEY", "APP_SECRET", options);
+
+ITriggerResult result = await pusher.TriggerAsync(
+  new string[]{"my-channel-1", "my-channel-2", "my-channel-3"},
+  "my-event",
+  new { message: "hello world" });
