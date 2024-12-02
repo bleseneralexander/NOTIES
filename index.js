@@ -8,7 +8,7 @@ const pusher = new Pusher({
   useTLS: true
 });
 
-pusher.trigger("MYCHANNEL", "MYEVENT", {
+pusher.trigger("MYCHANNEL", "MYCHANNEL2", "MYCHANNEL3", "MYEVENT", {
   message: "This Is A Notification"
 });
 
@@ -18,9 +18,10 @@ using PusherServer;
 
 var options = new PusherOptions();
 options.Cluster = "APP_CLUSTER";
-var pusher = new Pusher("APP_ID", "APP_KEY", "APP_SECRET", options);
+var pusher = new Pusher("MYCHANNEL", "MYEVENT", PusherOptions());
 
 ITriggerResult result = await pusher.TriggerAsync(
-  new string[]{"my-channel-1", "my-channel-2", "my-channel-3"},
+  new string[]{"MYCHANNEL", "MYCHANNEL2", "MYCHANNEL3"},
   "MYEVENT",
-  new { message: "This Is A Notification" });
+  
+  new TriggerAsync { message: "This Is A Notification" });
