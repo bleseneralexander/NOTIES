@@ -22,5 +22,5 @@ var pusher = new Pusher("APP_ID", "APP_KEY", "APP_SECRET", options);
 
 ITriggerResult result = await pusher.TriggerAsync(
   new string[]{"my-channel-1", "my-channel-2", "my-channel-3"},
-  "my-event",
+  "MYEVENT",
   new { message: "This Is A Notification" });
